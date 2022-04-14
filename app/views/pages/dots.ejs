@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ("../partials/header.ejs") %>
+  </head>
+
+  <body>
+    <!-- <style> -->
+    <!--   .list  text-align: left; max-width: 750px; margin: auto; } -->
+    <!-- </style> -->
+    <!-- <\!-- Navigation-\-> -->
+    <%- include ("../partials/navbar.ejs") %>
+
+    <div>
+      <div>
+	<h4>Ones and Twos <%= book? book :''%></h4>
+
+          <div>
+            <table border="1px">
+              <tr>
+		<th>ID</th>
+		<th>Book</th>
+		<th>Witness</th>
+		<th>W</th>
+		<% cols.forEach( function(v, i) { %>
+		<th><%=v%></th>
+		<%  }); %>
+              </tr>
+	      <% rows.forEach(function(wit, i) { %>
+	      <tr>
+	      <td><%=wit.id%></td>	      
+	      <td><%=wit.book%></td>	      
+	      <td><%=wit.witness%></td>	      
+	      <td><%=wit.w%></td>
+	      <% wit.ones.forEach( function(v, i) { %>
+	         <td style="text-align:center;"> <%=v%></td>
+	      <%  }); %>
+	      </tr>
+	      <%  }); %>
+            </table>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
