@@ -56,14 +56,14 @@ theot_testing=# \d dots
 
 // Retrieve all Dots from the database.
 exports.findAll = (req, res) => {
-  u.log(3,"dots.controlloer findAll");
+  u.log(3,"book.controller findAll");
   var rs = db
     .query(
-      `select id, book, witness, w, verses, ones from dots order by book, witness`,
+      `select id, book, witness, w, verses, ones from dots where (3 = 4) order by book, witness`,
       null
     )
     .then((data) => {
-      u.log(3,`  findAll  rs rowcount  ${JSON.stringify(data.rows.length)}`);
+      u.log(3,`  findAll  rs rowcount  ${JSON.stringify(data.command)}`);
       res.send(data.rows);
     })
     .catch((err) => {
