@@ -13,18 +13,20 @@
 
       <div>
 	<div>
-	  <h4>All Books</h4>
+	  <h4><a href="/book">All</a>> Study <%=studyno%> for book <a href="/book/<%=book%>"><%=book%></a></h4>
 
           <div>
             <table border="1px">
               <tr>
-		<th>Book</th>
+		<th>Field</th>
+		<th>Value</th>
               </tr>
-	      <% rows.forEach(function(study, i) { %>
-	      <tr>
-		<td><a href="/book/<%=study.ot_book%>"><%=study.ot_book%></a></td>	      
-	      </tr>
-	      <%  }); %>
+
+	      <tr><td>ot_book</td> <td><%=study.ot_book%></td></tr>
+	      <tr><td>study_no</td> <td><%=study.study_no%></td></tr>
+	      <tr><td>ot_book</td> <td><%=study.description%></td></tr>
+	      <tr><td>manuscripts</td> <td><%=study.mss_used%></td></tr>
+
             </table>
           </div>
 	</div>

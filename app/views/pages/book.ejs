@@ -13,7 +13,7 @@
 
       <div>
 	<div>
-	  <h4><a href="/book">Book:</a> <%=book%></h4>
+	  <h4><a href="/book">All</a>> Studies for book: <%=book%></h4>
 
           <div>
             <table border="1px">
@@ -27,7 +27,7 @@
 	      <% rows.forEach(function(study, i) { %>
 	      <tr>
 		<td><%=study.ot_book%></td>	      
-		<td><%=study.study_no%></td>	      
+		<td><a href="/book/<%=study.ot_book%>/study/<%=study.study_no%>"><%=study.study_no%></a></td>	      
 		<td><%=study.description%></td>	      
 		<td><%=study.date_created%></td>
 		<td><%=study.mss_used%></td>
