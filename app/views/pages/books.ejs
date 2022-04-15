@@ -6,41 +6,37 @@
 
   <body>
     <!-- <style> -->
-    <!--   .list  text-align: left; max-width: 750px; margin: auto; } -->
-    <!-- </style> -->
+      <!--   .list  text-align: left; max-width: 750px; margin: auto; } -->
+      <!-- </style> -->
     <!-- <\!-- Navigation-\-> -->
-    <%- include ("../partials/navbar.ejs") %>
+      <%- include ("../partials/navbar.ejs") %>
 
-    <div>
       <div>
-	<h4>Books: Ones and Twos</h4>
+	<div>
+	  <h4>All Books</h4>
 
           <div>
             <table border="1px">
               <tr>
-		<th>ID</th>
 		<th>Book</th>
-		<th>Witness</th>
-		<th>W</th>
-		<% cols.forEach( function(v, i) { %>
-		<th><%=v%></th>
-		<%  }); %>
+		<th>Study</th>
+		<th>Description</th>
+		<th>Date Created</th>
+		<th>Manuscripts</th>
               </tr>
-	      <% rows.forEach(function(wit, i) { %>
+	      <% rows.forEach(function(study, i) { %>
 	      <tr>
-	      <td><%=wit.id%></td>	      
-	      <td><%=wit.book%></td>	      
-	      <td><%=wit.witness%></td>	      
-	      <td><%=wit.w%></td>
-	      <% wit.ones.forEach( function(v, i) { %>
-	         <td style="text-align:center;"> <%=v%></td>
-	      <%  }); %>
+		<td><a href="/book/<%=study.ot_book%>"><%=study.ot_book%></a></td>	      
+		<td><%=study.study_no%></td>	      
+		<td><%=study.description%></td>	      
+		<td><%=study.date_created%></td>
+		<td><%=study.mss_used%></td>
 	      </tr>
 	      <%  }); %>
             </table>
           </div>
+	</div>
       </div>
-    </div>
   </body>
 </html>
 

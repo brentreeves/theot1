@@ -13,20 +13,17 @@ const u = require("../util/utils");
  rowsAsArray: false
 */
 exports.findAll = async () => {
-    u.log(3,"book.js findAll...");
-    var rs = await db.query(
-	    `select id, book, witness, w, verses, ones from dots order by book, witness limit 2`
-    )
-    u.log(4,`  book findAll  data: ${JSON.stringify(rs)}`);
+    u.log(3,"/db/book.js findAll...");
+    let sql = 'select ot_book, study_no, description, date_created, mss_used from ot_book_study order by ot_book, study_no'
+    var rs = await db.query( sql, null )
+    u.log(4,`  db/book findAll  data: ${JSON.stringify(rs)}`);
     return {"msg": "", "rows": rs.rows};
 }
 
 exports.findOne = async (book) => {
     u.log(3,"book.js findOne... book: ${book}");
-    var sql = 'select id, book, witness, w, verses, ones from dots where book = $1 order by book, witness limit 3'
-    var rs = await db.query(
-	sql, [book]
-    )
+    let sql = 'select ot_book, study_no, description, date_created, mss_used from ot_book_study where ot_book = $1 order by ot_book, study_no'
+    var rs = await db.query(sql, [book])
     u.log(4,`  book findOne  sql: ${sql}`);
     u.log(4,`  book findOne  data: ${JSON.stringify(rs)}`);
     return {"msg": "", "rows": rs.rows};

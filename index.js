@@ -2,33 +2,29 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
+// var corsOptions = {  origin: "http://localhost:8080" };
 const path = require("path");
 const u = require("./app/util/utils") // log and loglevel
 
-
-// ============================================================
+// -------------------------------------------------------------------------------
 require("dotenv").config();
 const db = require('./app/db')
 
-// ============================================================
-app.use(cors(corsOptions));
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(cors(corsOptions)); // see options above
+// -------------------------------------------------------------------------------
+app.set("views", path.join(__dirname, "app/views"))
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "app/public")))
 app.use('/assets', express.static(path.join(__dirname, "app/assets")))
 app.use('/util', express.static(path.join(__dirname, "app/util")))
 app.use('/stylesheets', express.static(path.join(__dirname, "app/public/stylesheets")))
 
-app.set("views", path.join(__dirname, "app/views"))
-
 // debug via "dd" and level from 0 - 5
+
 app.use((req, res, next)=>{
+    res.locals.ppdate = u.ppdate
     res.locals.dd = 0
     if ((typeof req.query) === 'undefined') {
 	// ok - leave it at zero
@@ -55,7 +51,7 @@ app.get("/analytics", (req, res) => { res.render('pages/analytics.ejs'); })
 app.get("/visualize", (req, res) => {  res.render('pages/visualize.ejs'); })
 app.get("/manuscripts", (req, res) => { res.render('pages/manuscripts.ejs'); })
 
-app.get("/zzdots/:book?", (req, res) => {
+app.get("/zzdots/:bk?", (req, res) => {
     u.log(1,'\n/dots/:book');
     var book = ''
     book = req.params.book
@@ -122,7 +118,7 @@ require('./app/routes/user.routes')(app);
 
 require('./app/routes/book.routes')(app);
 
-// set port, ligsten for requests
+// -------------------------------------------------------------------------------
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`theot1 server is running on port ${PORT}.`);

@@ -1,7 +1,7 @@
 const u = require("../util/utils")
 
 module.exports = function(app) {
-    u.log(1,'book.routes.js ...');
+    u.log(1,'book.routes.js !! ...');
     
     const book = require("../db/book.js");
     var router = require("express").Router();
@@ -19,7 +19,7 @@ module.exports = function(app) {
 
     router.get("/:book", async (req,res) => {
 	let abook = req.params.book
-	u.log(3,`book.routes /:book ${abook}`)
+	u.log(3,`book.routes ! /:book ${abook}`)
 	let rs = await book.findOne(abook)
 
 	u.log(3,`book.routes /:book rs: ${JSON.stringify(rs)}`)
@@ -32,8 +32,8 @@ module.exports = function(app) {
 
     router.get("/", async (req,res) => {
 	var rs = await book.findAll()
-	u.log(3,`book.routes / rs: ${JSON.stringify(rs)}`)
-	u.log(3,`book.routes / rows: ${JSON.stringify(rs.rows)}`)
+	u.log(3,`book.routes ! / rs: ${JSON.stringify(rs)}`)
+	u.log(3,`book.routes ! / rows: ${JSON.stringify(rs.rows)}`)
 	let headers = []
 	if (rs.rows.length > 0)
 	    headers = rs.rows[0].verses

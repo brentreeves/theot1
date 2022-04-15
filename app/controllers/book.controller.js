@@ -4,7 +4,7 @@ const u = require("../util/utils");
 // Create and Save a new book
 exports.create = (req, res) => {
   u.log(3,"book.controller create");
-  // Validate request
+
   if (!req.body.book) {
     res.status(400).send({
       message: "Nope, sorry, book can not be null.",
@@ -54,16 +54,18 @@ theot_testing=# \d dots
  id      | integer |           | not null | nextval('dots_id_seq'::regclass)
 */
 
-// Retrieve all Dots from the database.
+// -------------------------------------------------------------------------------
 exports.findAll = (req, res) => {
-  u.log(3,"book.controller findAll");
+  u.log(3,"book.controller findAll !!");
+//      `select id, book, witness, w, verses, ones from dots where (3 = 4) order by book, witness`,
+
   var rs = db
     .query(
-      `select id, book, witness, w, verses, ones from dots where (3 = 4) order by book, witness`,
+      `select ot_book, study_no, description, date_created, mss_used from ot_book_study order by ot_book, study_no`,
       null
     )
     .then((data) => {
-      u.log(3,`  findAll  rs rowcount  ${JSON.stringify(data.command)}`);
+      u.log(3,`  findAll  rs rowcount  ${JSON.stringify(data.rows.length)}`);
       res.send(data.rows);
     })
     .catch((err) => {
