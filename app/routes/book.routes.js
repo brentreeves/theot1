@@ -4,6 +4,7 @@ module.exports = function(app) {
     u.log(1,'book.routes.js ...');
     
     const book = require("../db/book.js");
+    const percent = require("../db/percent.js");
     var router = require("express").Router();
 
     // ??
@@ -16,6 +17,22 @@ module.exports = function(app) {
     //   res.header("Access-Control-Allow-Methods", "GET");
     //   next();
     // });
+
+    router.get("/:book/study/:study/percent", async (req,res) => {
+	let abook = req.params.book
+	let astudy = req.params.study
+	u.log(3,`book.routes  /:book ${abook} /:study ${astudy} percent`)
+
+	let rs = await percent.findOne(abook, astudy)
+	u.log(3,`book.routes /:book/study:study rs: ${JSON.stringify(rs)}`)
+	u.log(3,`book.routes /:book/study:study rows: ${JSON.stringify(rs.rows)}`)
+	u.log(3,`book.routes /:book/study:study rows[0]: ${JSON.stringify(rs.rows[0])}`)
+
+	// let headers = []
+	// if (rs.rows.length > 0)
+	//     headers = rs.rows[0].verses
+	res.render('pages/percent.ejs', {"percent" : rs.rows[0], "book": abook, "studyno": astudy});
+    });
 
     router.get("/:book/study/:study", async (req,res) => {
 	let abook = req.params.book

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ("../partials/header.ejs") %>
+    <style>
+      table {
+          border-spacing: 0px;
+          table-layout: fixed;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      td {
+          border: 1px solid black;
+          word-wrap: break-word;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- <style> -->
+      <!--   .list  text-align: left; max-width: 750px; margin: auto; } -->
+      <!-- </style> -->
+    <!-- <\!-- Navigation-\-> -->
+      <%- include ("../partials/navbar.ejs") %>
+
+      <div>
+	<div>
+	  <h4><a href="/book">All</a> > Book <a href="/book/<%=book%>"><%=book%></a> Study <%=studyno%> <a href="/book/<%=book%>/study/<%=studyno%>"></a>percent</h4>
+
+          <div>
+	    <% if (percent) { %>
+            <table width="800" border="1px">
+              <tr>
+		<th style="width:120px">Field</th>
+		<th>Value</th>
+              </tr>
+
+	      <tr><td>ot_book</td> <td><%=percent.ot_book%></td></tr>
+	      <tr><td>study_no</td> <td><%=percent.study_no%></td></tr>
+	      <tr><td>ot_book</td> <td><%=percent.description%></td></tr>
+	      <tr><td>created</td> <td><%=percent.date_created%></td></tr>
+	      <tr><td>riur</td> <td><%=percent.ratios_include_unique_readings%></td></tr>
+	      <tr><td>piur</td> <td><%=percent.percentages_include_unique_readings%></td></tr>
+	      <tr><td>reup</td> <td><%=percent.ratios_exclude_unique_plusses%></td></tr>
+	      <tr><td>peup</td> <td><%=percent.percentages_exclude_unique_plusses%></td></tr>
+	      <tr><td>reur</td> <td><%=percent.ratios_exclude_unique_readings%></td></tr>
+	      <tr><td>peur</td> <td><%=percent.percentages_exclude_unique_readings%></td></tr>
+            </table>
+	    <% } else { %>
+	    No percent entries found.
+	    <% } %>
+
+          </div>
+	</div>
+      </div>
+  </body>
+</html>
+
+

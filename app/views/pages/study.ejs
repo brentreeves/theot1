@@ -25,7 +25,7 @@
 
       <div>
 	<div>
-	  <h4><a href="/book">All</a>> Study <%=studyno%> for book <a href="/book/<%=book%>"><%=book%></a></h4>
+	  <h4><a href="/book">All</a> > Book <a href="/book/<%=book%>"><%=book%></a> Study <%=studyno%> <a href="/book/<%=book%>/study/<%=studyno%>/percent/">percent</a></h4>
 
           <div>
             <table width="800" border="1px">
@@ -37,6 +37,7 @@
 	      <tr><td>ot_book</td> <td><%=study.ot_book%></td></tr>
 	      <tr><td>study_no</td> <td><%=study.study_no%></td></tr>
 	      <tr><td>ot_book</td> <td><%=study.description%></td></tr>
+	      <tr><td>created</td> <td><%=study.date_created%></td></tr>
 	      <tr><td>manuscripts</td> <td><%=study.mss_used%></td></tr>
 
             </table>
