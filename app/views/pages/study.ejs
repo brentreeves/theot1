@@ -2,6 +2,18 @@
 <html lang="en">
   <head>
     <%- include ("../partials/header.ejs") %>
+    <style>
+      table {
+          border-spacing: 0px;
+          table-layout: fixed;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      td {
+          border: 1px solid black;
+          word-wrap: break-word;
+      }
+    </style>
   </head>
 
   <body>
@@ -16,9 +28,9 @@
 	  <h4><a href="/book">All</a>> Study <%=studyno%> for book <a href="/book/<%=book%>"><%=book%></a></h4>
 
           <div>
-            <table border="1px">
+            <table width="800" border="1px">
               <tr>
-		<th>Field</th>
+		<th style="width:120px">Field</th>
 		<th>Value</th>
               </tr>
 

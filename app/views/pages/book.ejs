@@ -2,13 +2,21 @@
 <html lang="en">
   <head>
     <%- include ("../partials/header.ejs") %>
+    <style>
+      table {
+          border-spacing: 0px;
+          table-layout: fixed;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      td {
+          border: 1px solid black;
+          word-wrap: break-word;
+      }
+      </style>
   </head>
 
   <body>
-    <!-- <style> -->
-      <!--   .list  text-align: left; max-width: 750px; margin: auto; } -->
-      <!-- </style> -->
-    <!-- <\!-- Navigation-\-> -->
       <%- include ("../partials/navbar.ejs") %>
 
       <div>
@@ -18,19 +26,17 @@
           <div>
             <table border="1px">
               <tr>
-		<th>Book</th>
 		<th>Study</th>
 		<th>Description</th>
 		<th>Date Created</th>
-		<th>Manuscripts</th>
+
               </tr>
 	      <% rows.forEach(function(study, i) { %>
 	      <tr>
-		<td><%=study.ot_book%></td>	      
-		<td><a href="/book/<%=study.ot_book%>/study/<%=study.study_no%>"><%=study.study_no%></a></td>	      
+		<td style="text-align:center"><a href="/book/<%=study.ot_book%>/study/<%=study.study_no%>"><%=study.study_no%></a></td>	      
 		<td><%=study.description%></td>	      
 		<td><%=study.date_created%></td>
-		<td><%=study.mss_used%></td>
+
 	      </tr>
 	      <%  }); %>
             </table>
