@@ -212,7 +212,7 @@ exports.findCalculatePercent = (req, res) => {
 
   var rs = db
     .query(
-      `select ot_book, study_no, date_created, variants from variants_set where ot_book = $1 and study_no = $2 order by ot_book, study_no`,
+      `select ot_book, study_no, date_created, variants from variants_set where ot_book = $1 tand study_no = $2 order by ot_book, study_no`,
       compositKeyArray
     )
     .then((data) => {

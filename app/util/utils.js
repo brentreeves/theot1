@@ -21,7 +21,6 @@ function ppdate(d) {
     }
 }
 
-
 module.exports = {
     loglevel,
     log,

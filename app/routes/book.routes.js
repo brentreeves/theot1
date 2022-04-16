@@ -5,6 +5,7 @@ module.exports = function(app) {
     
     const book = require("../db/book.js");
     const percent = require("../db/percent.js");
+    const variant = require("../db/variants.js");
     var router = require("express").Router();
 
     // ??
@@ -17,6 +18,18 @@ module.exports = function(app) {
     //   res.header("Access-Control-Allow-Methods", "GET");
     //   next();
     // });
+
+    router.get("/:book/study/:study/calculate", async (req,res) => {
+	let abook = req.params.book
+	let astudy = req.params.study
+	u.log(3,`book.routes  /:book ${abook} /:study ${astudy} calculate`)
+
+	let rs = await variant.calculateOne(abook, astudy)
+	u.log(3,`book.routes /:book/study:study calculate rs: ${JSON.stringify(rs)}`)
+
+	res.render('pages/calculated.ejs', {"data" : rs, "book": abook, "study": astudy});
+    });
+
 
     router.get("/:book/study/:study/percent", async (req,res) => {
 	let abook = req.params.book

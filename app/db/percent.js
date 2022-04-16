@@ -23,4 +23,3 @@ exports.findOne = async (book, study) => {
     return {"msg": "", "rows": rs.rows, "study": study, "book": book};
 }
 
-
