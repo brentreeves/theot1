@@ -4,7 +4,7 @@ sql
 *.*~
 th_*
 app/config/
-bugs.json
+app/bugs.json
 
 
 
