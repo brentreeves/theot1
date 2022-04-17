@@ -23,10 +23,10 @@ module.exports = (app) => {
   router.get("/:calculatepercent", calculatepercents.findCalculatePercent);
 
   // Update a calculatepercent with id
-  router.put("/:ot_book", calculatepercents.update);
+  router.put("/:book", calculatepercents.update);
 
   // Delete a calculatepercent by id
-  router.delete("/:ot_book", calculatepercents.delete);
+  router.delete("/:book", calculatepercents.delete);
 
   // Delete all calculatepercents
   router.delete("/", calculatepercents.deleteAll);

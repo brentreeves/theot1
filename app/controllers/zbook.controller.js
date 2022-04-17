@@ -61,7 +61,7 @@ exports.findAll = (req, res) => {
 
   var rs = db
     .query(
-      `select ot_book, study_no, description, date_created, mss_used from ot_book_study order by ot_book, study_no`,
+      `select book, study_no, description, date_created, mss_used from book_study order by book, study_no`,
       null
     )
     .then((data) => {

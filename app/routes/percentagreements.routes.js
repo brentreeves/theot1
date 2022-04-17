@@ -23,10 +23,10 @@ module.exports = (app) => {
   router.get("/:percentagreement", percentagreements.findPercentAgreement);
 
   // Update a percentagreement with id
-  router.put("/:ot_book", percentagreements.update);
+  router.put("/:book", percentagreements.update);
 
   // Delete a percentagreement by id
-  router.delete("/:ot_book", percentagreements.delete);
+  router.delete("/:book", percentagreements.delete);
 
   // Delete all percentagreements
   router.delete("/", percentagreements.deleteAll);

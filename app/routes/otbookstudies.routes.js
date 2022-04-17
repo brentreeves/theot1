@@ -23,10 +23,10 @@ module.exports = (app) => {
   router.get("/:otbookstudy", otbookstudies.findWitness);
 
   // Update a otbookstudy with id
-  router.put("/:ot_book", otbookstudies.update);
+  router.put("/:book", otbookstudies.update);
 
   // Delete a otbookstudy by id
-  router.delete("/:ot_book", otbookstudies.delete);
+  router.delete("/:book", otbookstudies.delete);
 
   // Delete all otbookstudies
   router.delete("/", otbookstudies.deleteAll);

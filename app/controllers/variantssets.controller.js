@@ -4,19 +4,19 @@ const db = require("../lib/db");
 exports.create = (req, res) => {
   console.log("variantssets.controller create");
   // Validate request
-  if (!req.body.ot_book) {
+  if (!req.body.book) {
     res.status(400).send({
-      message: "Nope, sorry, ot_book cannot be null.",
+      message: "Nope, sorry, book cannot be null.",
     });
     return;
   }
 
   var o = req.body;
-  vars = [o.ot_book, o.study_no, o.date_created, o.variants];
+  vars = [o.book, o.study_no, o.date_created, o.variants];
 
   var rs = db
     .query(
-      "insert into variants_set (ot_book, study_no, date_created, variants) values ($1, $2, $3, $4)",
+      "insert into variants_set (book, study_no, date_created, variants) values ($1, $2, $3, $4)",
       vars
     )
     .then((data) => {
@@ -24,14 +24,14 @@ exports.create = (req, res) => {
       // res.send(data.results);
       // console.log("rs ", data);
       res.send({
-        message: `variantssets.js Inserted variants_set with ot_book=${o.ot_book} study_no=${o.study_no}.`,
+        message: `variantssets.js Inserted variants_set with book=${o.book} study_no=${o.study_no}.`,
       });
     })
     .catch((err) => {
       res.status(500).send({
         message:
           err.message ||
-          `variantssets.js Error insert variants_set: ot_book: ${o.ot_book} id_1: ${o.study_no}`,
+          `variantssets.js Error insert variants_set: book: ${o.book} id_1: ${o.study_no}`,
       });
     });
 };
@@ -41,7 +41,7 @@ exports.findAll = (req, res) => {
   console.log("  in findAll for variantssets");
   var rs = db
     .query(
-      `select ot_book, study_no, date_created, variants from variants_set order by ot_book, study_no`,
+      `select book, study_no, date_created, variants from variants_set order by book, study_no`,
       null
     )
     .then((data) => {
@@ -64,7 +64,7 @@ exports.findVariantsSet = (req, res) => {
     return;
   }
 
-  // variantsset is in format {ot_book}-{study_no}
+  // variantsset is in format {book}-{study_no}
   // example 'oba-2'
   var compositKeyArray = variantsset.split('-');
 
@@ -72,7 +72,7 @@ exports.findVariantsSet = (req, res) => {
 
   var rs = db
     .query(
-      `select ot_book, study_no, date_created, variants from variants_set where ot_book = $1 and study_no = $2 order by ot_book, study_no`,
+      `select book, study_no, date_created, variants from variants_set where book = $1 and study_no = $2 order by book, study_no`,
       compositKeyArray
     )
     .then((data) => {
@@ -99,7 +99,7 @@ exports.findId = (req, res) => {
   }
   var rs = db
     .query(
-      `select id, book, witness, w, verses, ones from ot_book_study where id = $1 order by book, witness`,
+      `select id, book, witness, w, verses, ones from book_study where id = $1 order by book, witness`,
       vars
     )
     .then((data) => {

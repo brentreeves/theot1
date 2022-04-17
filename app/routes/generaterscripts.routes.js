@@ -23,10 +23,10 @@ module.exports = (app) => {
   router.get("/:generaterscript", generaterscripts.findGenerateRScript);
 
   // Update a generaterscript with id
-  router.put("/:ot_book", generaterscripts.update);
+  router.put("/:book", generaterscripts.update);
 
   // Delete a generaterscript by id
-  router.delete("/:ot_book", generaterscripts.delete);
+  router.delete("/:book", generaterscripts.delete);
 
   // Delete all generaterscripts
   router.delete("/", generaterscripts.deleteAll);

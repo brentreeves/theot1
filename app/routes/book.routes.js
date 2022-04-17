@@ -24,7 +24,7 @@ module.exports = function(app) {
 	let astudy = req.params.study
 	u.log(3,`book.routes  /:book ${abook} /:study ${astudy} calculate`)
 
-// select b.ot_book, b.study_no, v.variants from ot_book_study b inner join variants_set v on (b.ot_book = v.ot_book and b.study_no = v.study_no) where b.ot_book = 'bnr';
+// select b.book, b.study_no, v.variants from book_study b inner join variants_set v on (b.book = v.book and b.study_no = v.study_no) where b.book = 'bnr';
 
 
 	let matrix = await variant.calculateOne(abook, astudy)

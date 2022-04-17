@@ -23,10 +23,10 @@ module.exports = (app) => {
   router.get("/:rscript", rscripts.findRScript);
 
   // Update a rscript with id
-  router.put("/:ot_book", rscripts.update);
+  router.put("/:book", rscripts.update);
 
   // Delete a rscript by id
-  router.delete("/:ot_book", rscripts.delete);
+  router.delete("/:book", rscripts.delete);
 
   // Delete all rscripts
   router.delete("/", rscripts.deleteAll);

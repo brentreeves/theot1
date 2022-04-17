@@ -4,7 +4,7 @@ const m = require("../util/maths");
 
 exports.insertPercents = async (book, study, date, riu, piu, rep, pep, re, pe) => {
     u.log(3,`variants.js insertPercents... book: ${book} study: ${study}`);
-    let sql = "insert into percent_agreement (ot_book, study_no, date_created, ratios_include_unique_readings, percentages_include_unique_readings, ratios_exclude_unique_plusses, percentages_exclude_unique_plusses, ratios_exclude_unique_readings, percentages_exclude_unique_readings) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *";
+    let sql = "insert into percent_agreement (book, study_no, date_created, ratios_include_unique_readings, percentages_include_unique_readings, ratios_exclude_unique_plusses, percentages_exclude_unique_plusses, ratios_exclude_unique_readings, percentages_exclude_unique_readings) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *";
     var rs = await db.query(db, [book, study, date, riu, piu, rep, pep, re, pe])
     u.log(1,`percent.js insertPercents returning: ${JSON.stringify(rs)}`)
     return {"msg": "", "rows": rs.rows}
@@ -12,9 +12,9 @@ exports.insertPercents = async (book, study, date, riu, piu, rep, pep, re, pe) =
 
 exports.calculateOne = async (book, study) => {
     u.log(3,`variants.js calculateOne... book: ${book} study: ${study}`);
-    // let sql = 'select ot_book, study_no, date_created, variants from variants_set where ot_book = $1 and study_no = $2 order by ot_book, study_no'
+    // let sql = 'select book, study_no, date_created, variants from variants_set where book = $1 and study_no = $2 order by book, study_no'
 
-    let sql = "select b.ot_book, b.study_no, b.tvus, b.mss_used, v.variants from ot_book_study b inner join variants_set v on (b.ot_book = v.ot_book and b.study_no = v.study_no) where b.ot_book = $1 and b.study_no = $2"
+    let sql = "select b.book, b.study_no, b.tvus, b.mss_used, v.variants from book_study b inner join variants_set v on (b.book = v.book and b.study_no = v.study_no) where b.book = $1 and b.study_no = $2"
     u.log(3,`  sql: ${sql}`)
     var rs = await db.query( sql, [book, study]);
     var row = rs.rows[0]

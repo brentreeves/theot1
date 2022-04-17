@@ -22,18 +22,18 @@ exports.create = (req, res) => {
   // console.log("log req.body:");
   // console.log(req.body);
   // console.log('333333333333333333333333333333333333');
-  // console.log("log req.body.ot_book:");
-  // console.log(req.body.ot_book);
+  // console.log("log req.body.book:");
+  // console.log(req.body.book);
   // console.log('444444444444444444444444444444444444');
-  // console.log("log req.body['ot_book']:");
-  // console.log(req.body['ot_book']);
+  // console.log("log req.body['book']:");
+  // console.log(req.body['book']);
   // console.log('555555555555555555555555555555555555');
 
   // console.log("log req.params: " + req.params);
-  // console.log("log req.params.ot_book: " + req.params.ot_book);
+  // console.log("log req.params.book: " + req.params.book);
 
   // console.log("log req.query: " + req.query);
-  // console.log("log req.query.ot_book: " + req.query.ot_book);
+  // console.log("log req.query.book: " + req.query.book);
 
   // console.log('inspect');
   // var inspectReq = util.inspect(req);
@@ -45,12 +45,12 @@ exports.create = (req, res) => {
 
   //console.log("log res: " + res);
   //console.log("log res.body: " + res.body);
-  //console.log("log res.body.ot_book: " + res.body.ot_book);
+  //console.log("log res.body.book: " + res.body.book);
   //console.log("log res.body.study_no: " + res.body.study_no);
 
   //console.table("table req: " + req);
   //console.table("table req.body: " + req.body);
-  //console.table("table req.body.ot_book: " + req.body.ot_book);
+  //console.table("table req.body.book: " + req.body.book);
 
   //console.log('util.inspect next line');
   //console.log(util.inspect(req));
@@ -88,12 +88,12 @@ exports.create = (req, res) => {
   // console.log(JSON.stringify(body));
   // var strReqBody = JSON.stringify(req.body);
   // console.log("log stringify req.body: " + strReqBody);
-  //var strReqBodyOTBook = JSON.stringify(req.body.ot_book);
-  //console.log("log stringify req.body.ot_book: " + strReqBody.ot_book);
+  //var strReqBodyOTBook = JSON.stringify(req.body.book);
+  //console.log("log stringify req.body.book: " + strReqBody.book);
 
   // console.log("log res: " + res);
   // console.log("log res.body: " + res.body);
-  // console.log("log res.body.ot_book: " + res.body.ot_book);
+  // console.log("log res.body.book: " + res.body.book);
   // console.log("log res.body.study_no: " + res.body.study_no);
 
 //   body = JSON.stringify(body);
@@ -122,39 +122,39 @@ exports.create = (req, res) => {
 //   console.log('parsedReqBody');
 //   console.log(parsedReqBody);
 
-//   var parsedReqBodyOtbook = JSON.parse(req.body.ot_book);
+//   var parsedReqBodyOtbook = JSON.parse(req.body.book);
 //   console.log('parsedReqBodyOtbook');
 //   console.log(parsedReqBodyOtbook);
 
-//   var parsedReqBodyOtbookBrackets = JSON.parse(req.body['ot_book']);
+//   var parsedReqBodyOtbookBrackets = JSON.parse(req.body['book']);
 //   console.log('parsedReqBodyOtbookBrackets');
 //   console.log(parsedReqBodyOtbookBrackets);
 //   console.log('end parse');
-   // console.log("log stringify req.body.ot_book: " + JSON.stringify(req.body.ot_book));
+   // console.log("log stringify req.body.book: " + JSON.stringify(req.body.book));
 
   console.log('before forEach');
   Object.keys(req.body).forEach((prop)=> console.log(prop));
   console.log('after forEach');
 
   // Validate request
-  if (!req.body.ot_book) {
-    console.log("Nope, sorry, ot_book cannot be null.");
+  if (!req.body.book) {
+    console.log("Nope, sorry, book cannot be null.");
     res.status(400).send({
-      message: "Nope, sorry, ot_book cannot be null.",
+      message: "Nope, sorry, book cannot be null.",
     });
     return;
   }
-  console.log('ot_book is OK !');
+  console.log('book is OK !');
 
   console.log("req.body: " + req.body);
   var o = req.body;
   console.log("here");
   console.log("o: " + o);
-  vars = [o.ot_book, o.study_no, o.date_created, o.ratios_include_unique_readings, o.percentages_include_unique_readings, o.ratios_exclude_unique_plusses, o.percentages_exclude_unique_plusses, o.ratios_exclude_unique_readings, o.percentages_exclude_unique_readings];
+  vars = [o.book, o.study_no, o.date_created, o.ratios_include_unique_readings, o.percentages_include_unique_readings, o.ratios_exclude_unique_plusses, o.percentages_exclude_unique_plusses, o.ratios_exclude_unique_readings, o.percentages_exclude_unique_readings];
 
   var rs = db
     .query(
-      "insert into percent_agreement (ot_book, study_no, date_created, ratios_include_unique_readings, percentages_include_unique_readings, ratios_exclude_unique_plusses, percentages_exclude_unique_plusses, ratios_exclude_unique_readings, percentages_exclude_unique_readings) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+      "insert into percent_agreement (book, study_no, date_created, ratios_include_unique_readings, percentages_include_unique_readings, ratios_exclude_unique_plusses, percentages_exclude_unique_plusses, ratios_exclude_unique_readings, percentages_exclude_unique_readings) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
       vars
     )
     .then((data) => {
@@ -162,14 +162,14 @@ exports.create = (req, res) => {
       // res.send(data.results);
       // console.log("rs ", data);
       res.send({
-        message: `calculatepercents.js Inserted percent_agreement with ot_book=${o.ot_book} study_no=${o.study_no}.`,
+        message: `calculatepercents.js Inserted percent_agreement with book=${o.book} study_no=${o.study_no}.`,
       });
     })
     .catch((err) => {
       res.status(500).send({
         message:
           err.message ||
-          `calculatepercents.js Error insert percent_agreement: ot_book: ${o.ot_book} study_no: ${o.study_no}`,
+          `calculatepercents.js Error insert percent_agreement: book: ${o.book} study_no: ${o.study_no}`,
       });
     });
 };
@@ -179,7 +179,7 @@ exports.findAll = (req, res) => {
   console.log("  in findAll for calculatepercents");
   var rs = db
     .query(
-      `select ot_book, study_no, date_created, ratios_include_unique_readings, percentages_include_unique_readings, ratios_exclude_unique_plusses, percentages_exclude_unique_plusses, ratios_exclude_unique_readings, percentages_exclude_unique_readings from percent_agreement order by ot_book, study_no`,
+      `select book, study_no, date_created, ratios_include_unique_readings, percentages_include_unique_readings, ratios_exclude_unique_plusses, percentages_exclude_unique_plusses, ratios_exclude_unique_readings, percentages_exclude_unique_readings from percent_agreement order by book, study_no`,
       null
     )
     .then((data) => {
@@ -204,7 +204,7 @@ exports.findCalculatePercent = (req, res) => {
     return;
   }
 
-  // calculatepercent is in format {ot_book}-{study_no}
+  // calculatepercent is in format {book}-{study_no}
   // example 'oba-2'
   var compositKeyArray = calculatepercent.split('-');
 
@@ -212,7 +212,7 @@ exports.findCalculatePercent = (req, res) => {
 
   var rs = db
     .query(
-      `select ot_book, study_no, date_created, variants from variants_set where ot_book = $1 tand study_no = $2 order by ot_book, study_no`,
+      `select book, study_no, date_created, variants from variants_set where book = $1 tand study_no = $2 order by book, study_no`,
       compositKeyArray
     )
     .then((data) => {
@@ -236,7 +236,7 @@ function doCalculatePercents(data, res) {
   //console.log('here results');
   //console.log(results);
 
-  let otBook = results.ot_book;
+  let otBook = results.book;
   let studyNo = results.study_no;
   // don't use date_created from percent_agreement table 
   
@@ -496,7 +496,7 @@ function percentCalculator(otBookParam, studyNoParam, variantsParam, res) {
     
     var rs = db
       .query(
-        "insert into percent_agreement (ot_book, study_no, date_created, ratios_include_unique_readings, percentages_include_unique_readings, ratios_exclude_unique_plusses, percentages_exclude_unique_plusses, ratios_exclude_unique_readings, percentages_exclude_unique_readings) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+        "insert into percent_agreement (book, study_no, date_created, ratios_include_unique_readings, percentages_include_unique_readings, ratios_exclude_unique_plusses, percentages_exclude_unique_plusses, ratios_exclude_unique_readings, percentages_exclude_unique_readings) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
         vars
       )
       .then((data) => {
@@ -504,14 +504,14 @@ function percentCalculator(otBookParam, studyNoParam, variantsParam, res) {
         // res.send(data.results);
         // console.log("rs ", data);
         res.send({
-          message: `percentagreements.js Inserted percent_agreement with ot_book=${o.ot_book} study_no=${o.study_no}.`,
+          message: `percentagreements.js Inserted percent_agreement with book=${o.book} study_no=${o.study_no}.`,
         });
       })
       .catch((err) => {
         res.status(500).send({
           message:
             err.message ||
-            `percentagreements.js Error insert percent_agreement: ot_book: ${o.ot_book} study_no: ${o.study_no}`,
+            `percentagreements.js Error insert percent_agreement: book: ${o.book} study_no: ${o.study_no}`,
         });
       });
   }
@@ -529,7 +529,7 @@ exports.findId = (req, res) => {
   }
   var rs = db
     .query(
-      `select id, book, witness, w, verses, ones from ot_book_study where id = $1 order by book, witness`,
+      `select id, book, witness, w, verses, ones from book_study where id = $1 order by book, witness`,
       vars
     )
     .then((data) => {

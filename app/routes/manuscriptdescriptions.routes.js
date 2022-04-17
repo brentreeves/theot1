@@ -23,10 +23,10 @@ module.exports = (app) => {
   router.get("/:manuscriptdescription", manuscriptdescriptions.findWitness);
 
   // Update a manuscriptdescription with id
-  router.put("/:ot_book", manuscriptdescriptions.update);
+  router.put("/:book", manuscriptdescriptions.update);
 
   // Delete a manuscriptdescription by id
-  router.delete("/:ot_book", manuscriptdescriptions.delete);
+  router.delete("/:book", manuscriptdescriptions.delete);
 
   // Delete all manuscriptdescriptions
   router.delete("/", manuscriptdescriptions.deleteAll);

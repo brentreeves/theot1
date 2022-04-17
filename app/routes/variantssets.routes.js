@@ -23,10 +23,10 @@ module.exports = (app) => {
   router.get("/:variantsset", variantssets.findVariantsSet);
 
   // Update a variantsset with id
-  router.put("/:ot_book", variantssets.update);
+  router.put("/:book", variantssets.update);
 
   // Delete a variantsset by id
-  router.delete("/:ot_book", variantssets.delete);
+  router.delete("/:book", variantssets.delete);
 
   // Delete all variantssets
   router.delete("/", variantssets.deleteAll);

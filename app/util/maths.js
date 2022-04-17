@@ -104,7 +104,7 @@ function matrix(title, rows, display = 'percent') {
 }
 
 
-// convert to ot_book_study
+// convert to book_study
 //
 // dots:
 //
@@ -120,8 +120,8 @@ function matrix(title, rows, display = 'percent') {
 //
 // variants_set
 //
-// local_theot1=# select ot_book, study_no, array_length(variants,1), variants[0:5][0:5] from variants_set limit 4;
-//  ot_book | study_no | array_length |                           variants
+// local_theot1=# select book, study_no, array_length(variants,1), variants[0:5][0:5] from variants_set limit 4;
+//  book | study_no | array_length |                           variants
 // ---------+----------+--------------+---------------------------------------------------------------
 //  oba     |        1 |          540 | {{1,2,1,1,1},{2,2,2,2,2},{2,2,2,2,2},{1,1,1,1,1},{2,2,2,2,2}}
 //  oba     |        2 |          540 | {{1,2,1,1,1},{2,2,2,2,2},{2,2,2,2,2},{1,1,1,1,1},{2,2,2,2,2}}
@@ -129,9 +129,9 @@ function matrix(title, rows, display = 'percent') {
 //  deu     |        3 |            4 | {{1,2},{2,0},{2,2},{1,1}}
 // (4 rows)
 //
-// order in 'variants' column allegedly agrees with orders in ot_book_study: tvus x mss_used
+// order in 'variants' column allegedly agrees with orders in book_study: tvus x mss_used
 //
-// local_theot1=# select ot_book as book, study_no as st, array_length(mss_used,1) as n, mss_used[0:2], array_length(tvus,1) as tn, tvus[0:2], tvus[539:] from ot_book_study limit 4;
+// local_theot1=# select book as book, study_no as st, array_length(mss_used,1) as n, mss_used[0:2], array_length(tvus,1) as tn, tvus[0:2], tvus[539:] from book_study limit 4;
 //  book | st | n  |      mss_used       | tn  |              tvus               |                 tvus
 // ------+----+----+---------------------+-----+---------------------------------+---------------------------------------
 //  oba  |  1 | 36 | {EMIP1029,EMIP2007} | 540 | {{1,1:01a_col1},{2,1:01a_col2}} | {{539,1:21b_col11},{540,1:21b_col12}}
@@ -140,7 +140,7 @@ function matrix(title, rows, display = 'percent') {
 //  oba  |  4 | 36 | {EMIP1029,EMIP2007} | 540 | {{1,1:01a_col1},{2,1:01a_col2}} | {{539,1:21b_col11},{540,1:21b_col12}}
 // (4 rows)
 //
-// ot_book_study:
+// book_study:
 //
 
 // export async function getOnesRatios(aBook) {

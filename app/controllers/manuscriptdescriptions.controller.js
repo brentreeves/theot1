@@ -4,19 +4,19 @@ const db = require("../lib/db");
 exports.create = (req, res) => {
   console.log("manuscriptdescriptions.controller create");
   // Validate request
-  if (!req.body.ot_book) {
+  if (!req.body.book) {
     res.status(400).send({
-      message: "Nope, sorry, ot_book cannot be null.",
+      message: "Nope, sorry, book cannot be null.",
     });
     return;
   }
 
   var o = req.body;
-  vars = [o.ot_book, o.study_no, o.description, o.date_created, o.mss_used, o.tvus, o.google_ss_url, o.notes];
+  vars = [o.book, o.study_no, o.description, o.date_created, o.mss_used, o.tvus, o.google_ss_url, o.notes];
 
   var rs = db
     .query(
-      "insert into ot_book_study (ot_book, study_no, description, date_created, mss_used, tvus, google_ss_url, notes) values ($1, $2, $3, $4, $5, $6, $7, $8)",
+      "insert into book_study (book, study_no, description, date_created, mss_used, tvus, google_ss_url, notes) values ($1, $2, $3, $4, $5, $6, $7, $8)",
       vars
     )
     .then((data) => {
@@ -38,7 +38,7 @@ exports.create = (req, res) => {
       // res.send(data.results);
       // console.log("rs ", data);
       res.send({
-        message: `otbs.js send Inserted ot_book_study with ot_book=${o.ot_book} study_no_1=${o.study_no}.`,
+        message: `otbs.js send Inserted book_study with book=${o.book} study_no_1=${o.study_no}.`,
       });
     })
     .catch((err) => {
@@ -60,7 +60,7 @@ exports.create = (req, res) => {
       res.status(500).send({
         message:
           err.message ||
-          `otbs.js catch/send Error insert ot_book_study: id: ${o.id} id_1: ${o.id_1}`,
+          `otbs.js catch/send Error insert book_study: id: ${o.id} id_1: ${o.id_1}`,
       });
     });
 };
@@ -96,7 +96,7 @@ exports.findWitness = (req, res) => {
 
   var rs = db
     .query(
-      `select id, book, witness, w, verses, ones from ot_book_study where witness = $1 order by book, witness`,
+      `select id, book, witness, w, verses, ones from book_study where witness = $1 order by book, witness`,
       vars
     )
     .then((data) => {
@@ -123,7 +123,7 @@ exports.findId = (req, res) => {
   }
   var rs = db
     .query(
-      `select id, book, witness, w, verses, ones from ot_book_study where id = $1 order by book, witness`,
+      `select id, book, witness, w, verses, ones from book_study where id = $1 order by book, witness`,
       vars
     )
     .then((data) => {
