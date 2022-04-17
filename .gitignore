@@ -4,6 +4,7 @@ sql
 *.*~
 th_*
 app/config/*
+app/config/db.config.js
 
 
 # Logs
