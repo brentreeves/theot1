@@ -24,10 +24,13 @@ module.exports = function(app) {
 	let astudy = req.params.study
 	u.log(3,`book.routes  /:book ${abook} /:study ${astudy} calculate`)
 
-	let rs = await variant.calculateOne(abook, astudy)
-	u.log(3,`book.routes /:book/study:study calculate rs: ${JSON.stringify(rs)}`)
+// select b.ot_book, b.study_no, v.variants from ot_book_study b inner join variants_set v on (b.ot_book = v.ot_book and b.study_no = v.study_no) where b.ot_book = 'bnr';
 
-	res.render('pages/calculated.ejs', {"data" : rs, "book": abook, "study": astudy});
+
+	let matrix = await variant.calculateOne(abook, astudy)
+	u.log(3,`book.routes /:book/study:study calculate: ${JSON.stringify(matrix)}`)
+
+	res.render('pages/calculated.ejs', {"data" : matrix, "book": abook, "study": astudy, });
     });
 
 

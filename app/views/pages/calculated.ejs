@@ -13,6 +13,9 @@
           border: 1px solid black;
           word-wrap: break-word;
       }
+      td.diag {
+	  background-color: #DDDDDD;
+      }
       </style>
   </head>
 
@@ -23,9 +26,24 @@
 	<div>
 	  <h4><a href="/book">All</a> > Calculated book: <%=book%> study: <%=study%></h4>
 
-          <div>Data:
-	  <%=data%>
+          <div>
+	    <%=data[0][0]%>
+
+            <table border="1px">
+	      <% data.forEach(function(row, i) { %>
+	      <tr>
+		<% row.forEach(function(cell, j) { %>
+		<% if (j < 1)  { %>
+		<td><%=cell%> </td>
+		<% } else { %>
+		  <td class=<%= (i == j) ? "diag" : "" %> style="text-align:center"><%=cell%> </td>
+		<% }  %>
+		<%  }); %>
+	      </tr>
+	      <%  }); %>
+            </table>
           </div>
+
 	</div>
       </div>
   </body>

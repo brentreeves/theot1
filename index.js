@@ -4,6 +4,8 @@ const cors = require("cors");
 const app = express();
 // var corsOptions = {  origin: "http://localhost:8080" };
 const path = require("path");
+
+global.LOGLEVEL = 0
 const u = require("./app/util/utils") // log and loglevel
 
 // -------------------------------------------------------------------------------
@@ -32,10 +34,13 @@ app.use((req, res, next)=>{
 	if ((typeof req.query.dd) === 'undefined') {
 	    // still leaving it at zero...
 	} else {
+
 	    let n = parseInt(req.query.dd)
 	    if (n !== n) // because NaN is never equal to itself
 		n = 0
 	    res.locals.dd = n
+	    LOGLEVEL = n
+	    console.log(`DEBUG: ${n}`)
 	}
     }
     next();

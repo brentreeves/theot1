@@ -1,7 +1,7 @@
-var loglevel = 4
+// var loglevel = 0
 
 function log(l,x) {
-    if (l < loglevel)
+    if (l < LOGLEVEL)
 	console.log(x)
 }
 
@@ -21,8 +21,8 @@ function ppdate(d) {
     }
 }
 
+
 module.exports = {
-    loglevel,
     log,
     ppdate
 }

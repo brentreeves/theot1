@@ -1,5 +1,6 @@
 const db = require("../db");
 const u = require("../util/utils");
+const m = require("../util/maths");
 
 exports.insertPercents = async (book, study, date, riu, piu, rep, pep, re, pe) => {
     u.log(3,`variants.js insertPercents... book: ${book} study: ${study}`);
@@ -11,11 +12,17 @@ exports.insertPercents = async (book, study, date, riu, piu, rep, pep, re, pe) =
 
 exports.calculateOne = async (book, study) => {
     u.log(3,`variants.js calculateOne... book: ${book} study: ${study}`);
-    let sql = 'select ot_book, study_no, date_created, variants from variants_set where ot_book = $1 and study_no = $2 order by ot_book, study_no'
-    var rs = await db.query( sql, [book, study]);
-    u.log(3,`\ncalculateOne sofar: ${JSON.stringify(rs.rows[0].variants.length)}\n`)
+    // let sql = 'select ot_book, study_no, date_created, variants from variants_set where ot_book = $1 and study_no = $2 order by ot_book, study_no'
 
-    var cp = calculatePercents(book, study, rs.rows[0].variants);
+    let sql = "select b.ot_book, b.study_no, b.tvus, b.mss_used, v.variants from ot_book_study b inner join variants_set v on (b.ot_book = v.ot_book and b.study_no = v.study_no) where b.ot_book = $1 and b.study_no = $2"
+    u.log(3,`  sql: ${sql}`)
+    var rs = await db.query( sql, [book, study]);
+    var row = rs.rows[0]
+    u.log(3,`\ncalculateOne sofar: ${JSON.stringify(rs)}  row: ${JSON.stringify(row)}`)
+
+    // var cp = calculatePercents(book, study, rs.rows[0].variants);
+    u.log(3,`calculateOne b4: ${JSON.stringify(rs.mss_used)}  tvu: ${JSON.stringify(rs.tvus)} variants: ${JSON.stringify(rs.variants)}`)
+    var cp = m.data_to_ratios_json(row.mss_used, row.tvus, row.variants);
     u.log(3,`calculateOne returning: ${JSON.stringify(cp)}`)
     return cp
 }
