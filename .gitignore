@@ -3,7 +3,8 @@ notes.txt
 sql
 *.*~
 th_*
-app/config
+app/config/*
+
 
 # Logs
 logs
