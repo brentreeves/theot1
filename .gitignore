@@ -1,8 +1,8 @@
 # local
+.DS_STORE
 notes.txt
 sql
 *.*~
-th_*
 app/config/
 app/bugs.json
 
