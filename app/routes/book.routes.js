@@ -68,24 +68,41 @@ module.exports = function(app) {
     router.get("/:book", async (req,res) => {
 	let abook = req.params.book
 	u.log(3,`book.routes /:book ${abook}`)
-	let rs = await book.findOne(abook)
+	let rs = await book.findStudies(abook)
 
 	u.log(3,`book.routes /:book rs: ${JSON.stringify(rs)}`)
 	u.log(3,`book.routes /:book rows: ${JSON.stringify(rs.rows)}`)
 	let headers = []
 	if (rs.rows.length > 0)
 	    headers = rs.rows[0].verses
-	res.render('pages/book.ejs', {"rows" : rs.rows, "book": abook});
+	res.render('pages/studies.ejs', {"rows" : rs.rows, "book": abook});
     });
 
     router.get("/", async (req,res) => {
-	var rs = await book.findDistinct()
-	u.log(3,`book.routes ! / rs: ${JSON.stringify(rs)}`)
-	u.log(3,`book.routes ! / rows: ${JSON.stringify(rs.rows)}`)
+	u.log(3,`book.routes / `)
+	var rs = await book.findAll()
+	u.log(3,`book.routes / rs: ${JSON.stringify(rs)}`)
+	u.log(3,`book.routes / rows: ${JSON.stringify(rs.rows)}`)
 	let headers = []
 	if (rs.rows.length > 0)
 	    headers = rs.rows[0].verses
 	res.render('pages/books.ejs', {"rows" : rs.rows});
+    })
+
+    router.post("/add", async (req,res) => {
+	u.log(3,`book.routes /add `)
+	var id = req.body.id
+	var bookname = req.body.bookname
+	u.log(3,`book.routes /add  id: ${id} bookname: ${bookname}`)
+	var rs = await book.add(id, bookname)
+	u.log(3,`book.routes /add rs: ${JSON.stringify(rs)}`)
+	let headers = []
+	if (rs)
+	    if (rs.rows)
+		if (rs.rows.length > 0)
+		    headers = rs.rows[0].verses
+	res.redirect('/book')
+	// res.render('pages/books.ejs', {"rows" : rs.rows});
     })
 
     app.use("/book", router);

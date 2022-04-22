@@ -1,17 +1,17 @@
 module.exports = (app) => {
-  const otbookstudies = require("../controllers/otbookstudies.controller.js");
+  const otbookstudies = require("../controllers/bookstudies.controller.js");
 
   var router = require("express").Router();
 
-  app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    res.header("Access-Control-Allow-Methods", "GET");
-    next();
-  });
+  // app.use(function (req, res, next) {
+  //   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  //   res.header(
+  //     "Access-Control-Allow-Headers",
+  //     "Origin, X-Requested-With, Content-Type, Accept"
+  //   );
+  //   res.header("Access-Control-Allow-Methods", "GET");
+  //   next();
+  // });
 
   // Create a new otbookstudy
   router.post("/", otbookstudies.create);

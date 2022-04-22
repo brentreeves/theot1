@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ("../partials/header.ejs") %>
+    <style>
+      table {
+          border-spacing: 0px;
+          table-layout: fixed;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      td {
+          border: 1px solid black;
+          word-wrap: break-word;
+      }
+      </style>
+  </head>
+
+  <body>
+      <%- include ("../partials/navbar.ejs") %>
+
+      <div>
+	<div>
+	  <h4><a href="/book">All</a>> Studies for book: <%=book%></h4>
+
+          <div>
+            <table border="1px">
+              <tr>
+		<th>Study</th>
+		<th>Description</th>
+		<th>Date Created</th>
+
+              </tr>
+	      <% rows.forEach(function(study, i) { %>
+	      <tr>
+		<td style="text-align:center"><a href="/book/<%=study.book_id%>/study/<%=study.study_no%>"><%=study.study_no%></a></td>	      
+		<td><%=study.description%></td>	      
+		<td><%=study.date_created%></td>
+
+	      </tr>
+	      <%  }); %>
+            </table>
+          </div>
+	</div>
+
+      </div>
+  </body>
+</html>
+
+
