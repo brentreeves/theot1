@@ -2,18 +2,7 @@
 <html lang="en">
   <head>
     <%- include ("../partials/header.ejs") %>
-    <style>
-      table {
-          border-spacing: 0px;
-          table-layout: fixed;
-          margin-left: auto;
-          margin-right: auto;
-      }
-      td {
-          border: 1px solid black;
-          word-wrap: break-word;
-      }
-    </style>
+
   </head>
 
   <body>
@@ -28,7 +17,7 @@
 	  <h4><a href="/book">All</a> > Book <a href="/book/<%=book%>"><%=book%></a> Study <%=studyno%> <a href="/book/<%=book%>/study/<%=studyno%>/calculate/">Calculate Percent Agreement</a></h4>
 
           <div>
-            <table width="800" border="1px">
+            <table class="table table-striped table-bordered table-sm table-responsive">
               <tr>
 		<th style="width:120px">Field</th>
 		<th>Value</th>
@@ -40,6 +29,8 @@
 	      <tr><td>created</td> <td><%=study.date_created%></td></tr>
 	      <tr><td>mss count</td> <td><%=study.mss_used.length%></td></tr>
 	      <tr><td>manuscripts</td> <td><%=study.mss_used%></td></tr>
+	      <tr><td>url</td> <td><%=study.google_ss_url%></td></tr>
+	      <tr><td>tvus</td> <td><%=study.tvus%></td></tr>
 
             </table>
           </div>
@@ -47,5 +38,3 @@
       </div>
   </body>
 </html>
-
-

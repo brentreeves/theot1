@@ -2,48 +2,47 @@
 <html lang="en">
   <head>
     <%- include ("../partials/header.ejs") %>
-    <style>
-      table {
-          border-spacing: 0px;
-          table-layout: fixed;
-          margin-left: auto;
-          margin-right: auto;
-      }
-      td {
-          border: 1px solid black;
-          word-wrap: break-word;
-      }
-      </style>
   </head>
 
   <body>
-      <%- include ("../partials/navbar.ejs") %>
+    <%- include ("../partials/navbar.ejs") %>
 
+    <div>
       <div>
-	<div>
-	  <h4><a href="/book">All</a>> Studies for book: <%=book%></h4>
+	<h4><a href="/book">All</a> > Studies for book: <%=book%></h4>
 
-          <div>
-            <table border="1px">
-              <tr>
-		<th>Study</th>
-		<th>Description</th>
-		<th>Date Created</th>
+        <div>
+	  <% if (rows.length < 1) { %>
+	     No Studies found.
+	     <div class="w-50">
+	       <form name = "add_study" method="POST" action="/book/<%=book%>/addStudy">
+		 <input type="hidden" id="book" name="book" value="<%=book%>">
+		 <button type="submit" class="btn btn-primary">Add a Study !</button>
+	       </form>
+	     </div>
+	     <% } else { %>
+             <table class="table table-striped table-bordered table-sm table-responsive">
+               <tr>
+		 <th>Study</th>
+		 <th>Description</th>
+		 <th>Date Created</th>
 
-              </tr>
-	      <% rows.forEach(function(study, i) { %>
-	      <tr>
-		<td style="text-align:center"><a href="/book/<%=study.book_id%>/study/<%=study.study_no%>"><%=study.study_no%></a></td>	      
-		<td><%=study.description%></td>	      
-		<td><%=study.date_created%></td>
+               </tr>
+	       <% rows.forEach(function(study, i) { %>
+	       <tr>
+		 <td style="text-align:center"><a href="/book/<%=study.book_id%>/study/<%=study.study_no%>"><%=study.study_no%></a></td>	      
+		 <td><%=study.description%></td>	      
+		 <td><%=study.date_created%></td>
 
-	      </tr>
-	      <%  }); %>
-            </table>
-          </div>
-	</div>
+	       </tr>
+	       <%  }); %>
 
+             </table>
+	     <% } %>
+        </div>
       </div>
+
+    </div>
   </body>
 </html>
 

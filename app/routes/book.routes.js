@@ -88,7 +88,7 @@ module.exports = function(app) {
 	    headers = rs.rows[0].verses
 	res.render('pages/books.ejs', {"rows" : rs.rows});
     })
-
+ 
     router.post("/add", async (req,res) => {
 	u.log(3,`book.routes /add `)
 	var id = req.body.id
@@ -103,6 +103,16 @@ module.exports = function(app) {
 		    headers = rs.rows[0].verses
 	res.redirect('/book')
 	// res.render('pages/books.ejs', {"rows" : rs.rows});
+    })
+
+    
+    router.post("/:book/addStudy", async (req,res) => {
+	u.log(3,`book.routes /:book/addStudy `)
+	var bookname = req.body.book
+	u.log(3,`book.routes /addStudy  bookname: ${bookname}`)
+	var rs = await book.addStudy(bookname)
+	u.log(3,`book.routes /add rs: ${JSON.stringify(rs)}`)
+	res.redirect(`/book/${bookname}`)
     })
 
     app.use("/book", router);

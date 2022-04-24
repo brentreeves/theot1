@@ -1,18 +1,6 @@
 const db = require("../db");
 const u = require("../util/utils");
 
-/*
-{command: "SELECT",
- rowCount: 42,
- oid: null,
- rows: [],
- fields: [],
- _parsers: [],
- _types: {},
- RowCtor: null,
- rowsAsArray: false
-*/
-
 exports.findDistinct = async () => {
     u.log(3,"/db/book.js findDistinct...");
     let sql = 'select distinct book_id from book_study order by book_id'
@@ -50,12 +38,21 @@ exports.findOne = async (book) => {
 
 exports.findStudies = async (book) => {
     u.log(3,"book.js findStudies... book: ${book}");
-    let sql = 'select book_id, study_no, description, date_created, mss_used from book_study where book_id = $1 order by book_id, study_no'
+    let sql = 'select book_id, study_no, description, date_created, mss_used, tvus, google_ss_url from book_study where book_id = $1 order by book_id, study_no'
     var rs = await db.query(sql, [book])
     u.log(4,`  book findOne  sql: ${sql}`);
     u.log(4,`  book findOne  data: ${JSON.stringify(rs)}`);
     return {"msg": "", "rows": rs.rows};
 }
+
+exports.addStudy = async (bookname) => {
+    u.log(3,`book.js addStudy... bookname: ${bookname}`);
+    let sql = 'insert into book_study (book_id, study_no, description, date_created, google_ss_url, mss_used, tvus) values ($1, $2, $3, $4, $5, $6, $7) returning *'
+    var args = [bookname, 1, `Inserted as a study just for ${bookname}`, '2022/01/02', 'http://acu.edu', '{mss1, mss2, mss3}', '{v1, v2, v3}']
+    var rs = await db.query(sql, args);
+    return {"msg": "", "rs": rs};	    
+}
+
 
 exports.add = async (id, bookname) => {
     u.log(3,`book.js add... id: ${id} bookname: ${bookname}`);
