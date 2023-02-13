@@ -1,4 +1,4 @@
-# theot1
-theme: minima
-theot single-server website
-updated
+# Theot on Github
+
+Theot pages directly on github
+
