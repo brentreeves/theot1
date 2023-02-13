@@ -1,4 +1,4 @@
-# Theot on Github
+# Books / Visualizations / etc
 
-Theot pages directly on github
+Links here
 
